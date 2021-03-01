@@ -1,0 +1,4 @@
+[ansible1]
+172.42.42.211 ansible_connection=ssh ansible_ssh_user=vagrant
+[ansible2]
+172.42.42.212 ansible_connection=ssh ansible_ssh_user=vagrant

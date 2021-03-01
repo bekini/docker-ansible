@@ -1,0 +1,18 @@
+FROM python:3.7.6-stretch
+
+RUN pip install pip --upgrade
+RUN pip install ansible
+
+RUN apt-get update -y && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    sshpass
+
+RUN mkdir /root/.ssh/
+COPY ssh/* /root/.ssh/
+CMD cat test_hosts >> /root/hosts
+
+# make sure your domain is accepted
+RUN touch /root/.ssh/known_hosts
+# RUN ssh-keyscan 172.42.42.211 >> /root/.ssh/known_hosts
+
+WORKDIR /work

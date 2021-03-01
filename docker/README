@@ -1,0 +1,9 @@
+Ansible test host should be running to have ssh connect set up
+
+Add ansible test hosts to .ssh/config
+
+create a ssh private key for ansible and copy it to /root/.ssh/id_rsa
+
+copy public key to ansible test hosts
+
+
