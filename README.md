@@ -1,4 +1,5 @@
-# docker-ansible
+# docker-ansible - run from a container 
+
 
 
 https://medium.com/@iced_burn/run-ansible-with-docker-9eb27d75285b
@@ -16,14 +17,25 @@ create a ssh private key for ansible and copy it to /root/.ssh/id_rsa
 
 copy public key to ansible test hosts
 
+## This landscape setup for testing ansible-docker 
+w540 - docker landscape
+w540 - vagrant: /usr/lib/libvirt/vagrant/ansible/Vagrantfile - makes two hosts Ubuntu 18.04 - ansible1 ansible2
+
+## Authentification by ssh certificat 
+ I make a special private key for this 'project' in a folder "ssh" this folder is in .gitignore !
+ information in ssh folder are copied to container /root/.ssh
+
+## Running a playbook 
+hosts description are in inventory made at time we make dockerimage ( copy ssh 'things' to container)
+At this time the name on the container is bk-ansible
+
+$ docker run -v "${PWD}":/work:ro -v ~/.ansible/roles:/root/.ansible/roles  --rm bk-ansible ansible-playbook playbook.yml -i testX
+
+# run the same with only specific host
+$ docker run -v "${PWD}":/work:ro -v ~/.ansible/roles:/root/.ansible/roles  --rm bk-ansible ansible-playbook playbook.yml -i testX --limit ansible1
 
 
+## Author Information
 
-
-
-# ---- 
-bekini@w540:~/ansible/test_docker_ansible$ docker run -v "${PWD}":/work:ro -v ~/.ansible/roles:/root/.ansible/roles -v ~/.ssh:/root/.ssh:ro --rm spy86/ansible:latest ansible-playbook playbook.yml
-[WARNING]: No inventory was parsed, only implicit localhost is available
-[WARNING]: provided hosts list is empty, only localhost is available. Note that
-the implicit localhost does not match 'all'
+  - Bent Kirkegaard Nielsen
 
