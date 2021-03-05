@@ -9,26 +9,32 @@ https://github.com/spy86/docker-ansible
 ansible dir: /home/bekini/ansible/test_docker_ansible
 ansible docker: ~/docker/ansible
 
- --- files are made from at template in this format ---
+### Files are made from at template in this format:
  IP:host name:user:passwd:
  172.42.42.211:ansible1:vagrant:xxxx:
- --------------------------------------------------------
- --- files to make ---
- -------- files copied to docker image ------------------
+ 
+### files to make
+ files copied to docker image ------------------
  - .ssh/config
  - .ssh/known_hosts
- --------------------------------------------------------
+
  ansible inventory used for connect to ansible 'clients'
  inventory is used on 'work' PC running docker image
 
 ## demands
 Ansible test host should be running to have ssh connect set up
+User should have ssh login with certificat
 
 Add ansible test hosts to .ssh/config
 
-create a ssh private key for ansible and copy it to /root/.ssh/id_rsa
+### ssh certificat 
+create a ssh private key in docker/ssh, this is in '.gitignore'  (ssh-keygen -t rsa)
 
-copy public key to ansible test hosts
+put ansible clients in 'test_hosts', this file is placed in docker images.
+
+running 'make' will create ansible inventory and files for ssh connect and place them in docker image.
+
+If 'Ansible test hosts' are up and running and user have a ssh with certificat, Ansible docker users public key will be added to the 'Ansible clients'
 
 ## This landscape setup for testing ansible-docker 
 w540 - docker landscape
