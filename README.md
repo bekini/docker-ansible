@@ -56,6 +56,8 @@ $ docker run -v "${PWD}":/work:ro -v ~/.ansible/roles:/root/.ansible/roles  --rm
 # run the same with only specific host
 $ docker run -v "${PWD}":/work:ro -v ~/.ansible/roles:/root/.ansible/roles  --rm bk-ansible ansible-playbook playbook.yml -i testX --limit ansible1
 
+# connect to docker image and test connection to 'Ansible Clients'
+$ docker run -it --rm bk-ansible bash
 
 ## Author Information
 
